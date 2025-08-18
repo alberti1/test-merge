@@ -1,0 +1,2 @@
+changelog.xml merge=union
+**/2nd_line_changelog.xml merge=union

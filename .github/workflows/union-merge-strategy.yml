@@ -1,0 +1,26 @@
+name: Merge Workflow with Custom Union Driver
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure script is executable
+        run: chmod +x scripts/merge/strategies/union-merge-strategy.sh
+
+      - name: Ensure write permissions
+        run: |
+          chmod -R 777 scripts/merge/strategies/logs
+
+      - name: Configure custom union merge driver 
+        run: |
+        git config --global merge.union.name "custom union merge driver"
+        git config --global merge.union.driver "scripts/merge/strategies/union-merge-strategy.sh %O %A %B"

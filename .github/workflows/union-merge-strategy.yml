@@ -1,4 +1,5 @@
 name: Merge Workflow with Custom Union Driver
+
 on:
   push:
     branches:
@@ -6,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   merge:
     runs-on: ubuntu-latest
@@ -20,7 +22,7 @@ jobs:
         run: |
           chmod -R 777 scripts/merge/strategies/logs
 
-      - name: Configure custom union merge driver 
+      - name: Configure custom union merge driver
         run: |
-        git config --global merge.union.name "custom union merge driver"
-        git config --global merge.union.driver "scripts/merge/strategies/union-merge-strategy.sh %O %A %B"
+          git config --global merge.union.name "custom union merge driver"
+          git config --global merge.union.driver "scripts/merge/strategies/union-merge-strategy.sh %O %A %B"
